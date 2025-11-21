@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="style.css"
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Ahmad Alfin Hasan</title>
+  <meta name="description" content="Portfolio pribadi dengan animasi modern" />
+
+  <style>
+    :root{
+      --bg1: linear-gradient(135deg,#0f172a 0%, #0b1220 40%, #071029 100%);
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.06);
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --glass-border: rgba(255,255,255,0.08);
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+
+    body{
+      background: var(--bg1);
+      display:flex;align-items:center;justify-content:center;padding:40px;
+    }
+
+    /* Page wrapper */
+    .wrap{
+      width:100%;max-width:1100px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:18px;padding:28px;box-shadow: 0 8px 40px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+      position:relative;overflow:hidden;
+    }
+
+    /* Animated gradient blobs (background) */
+    .blob{
+      position:absolute;filter:blur(60px);opacity:0.9;mix-blend-mode:screen;transform-origin:center;
+    }
+    .blob.one{width:480px;height:480px;background:radial-gradient(circle at 30% 30%, rgba(124,58,237,0.6), transparent 40%);top:-120px;left:-120px;animation:float1 8s ease-in-out infinite;}
+    .blob.two{width:360px;height:360px;background:radial-gradient(circle at 70% 70%, rgba(6,182,212,0.55), transparent 35%);bottom:-100px;right:-100px;animation:float2 10s ease-in-out infinite;}
+
+    @keyframes float1{0%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(18px) rotate(12deg) scale(1.05)}100%{transform:translateY(0) rotate(0) scale(1)}}
+    @keyframes float2{0%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(-18px) rotate(-10deg) scale(.98)}100%{transform:translateY(0) rotate(0) scale(1)}}
+
+    /* Header */
+    header{display:flex;align-items:center;gap:18px}
+    .avatar img{width:92px;height:92px;border-radius:18px;flex-shrink:0;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;box-shadow:0 8px 30px rgba(12,8,40,0.6);border:1px solid var(--glass-border);}
+    .avatar img{width:84px;height:84px;border-radius:12px;object-fit:cover;display:block}
+    .title{color:#e6eef8}
+    .title h1{margin:0;font-size:22px;letter-spacing:0.2px}
+    .title p{margin:4px 0 0 0;color:rgba(230,238,248,0.7);font-size:13px}
+
+    /* Buttons */
+    .controls{margin-left:auto;display:flex;gap:8px}
+    .btn{background:var(--glass);border:1px solid var(--glass-border);padding:8px 12px;border-radius:10px;color:#e6eef8;font-weight:600;cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+
+    /* Main content grid */
+    .grid{display:grid;grid-template-columns: 1fr 420px;gap:22px;margin-top:18px}
+
+    /* About card */
+    .card{background:var(--card);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.02);backdrop-filter: blur(6px)}
+    .bio{line-height:1.6;color:rgba(230,238,248,0.9)}
+
+    /* Skills */
+    .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .skill{padding:8px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);font-size:13px}
+
+    /* Projects column */
+    .projects{display:flex;flex-direction:column;gap:14px}
+    .project{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);}
+    .proj-thumb{width:84px;height:64px;border-radius:8px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,0.03)}
+    .proj-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .proj-info h3{margin:0;font-size:15px}
+    .proj-info p{margin:6px 0 0 0;font-size:13px;color:rgba(230,238,248,0.75)}
+
+    /* Animated SVG hero */
+    .hero-svg{width:100%;height:200px;display:block}
+
+    /* Footer */
+    footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;color:rgba(230,238,248,0.66);font-size:13px}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      .projects{order:2}
+    }
+
+    /* Tiny hover/tilt effect (no external lib) */
+    .project:hover{transform:translateY(-6px) scale(1.01);transition:all .22s cubic-bezier(.2,.9,.3,1)}
+
+    /* simple focus styles */
+    .btn:focus{outline:2px solid rgba(124,58,237,0.18);outline-offset:3px}
+  </style>
+</head>
+<body>
+  <div class="wrap" aria-label="Portfolio">
+
+    <!-- background animated blobs -->
+    <div class="blob one" aria-hidden="true"></div>
+    <div class="blob two" aria-hidden="true"></div>
+
+    <header>
+     
+      <div class="avatar">
+        <!-- Replace src with your photo -->
+         <img src="images.jpg" alt="avatar"/>
+      </div>
+      <div class="title">
+        <h1>Ahmad Alfin Hasan — Web Developer</h1>
+        <p>Desain modern • Frontend • UI/UX • Animasi</p>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="downloadBtn">Unduh CV</button>
+        <button class="btn" id="themeBtn">Light</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <section class="card">
+          <!-- Animated SVG hero -->
+          <svg class="hero-svg" viewBox="0 0 800 200" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0%" stop-color="#7c3aed"/>
+                <stop offset="100%" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+            <path id="wave" d="M0 120 C 150 40 350 200 800 80 L800 200 L0 200 Z" fill="url(#g1)"></path>
+            <!-- Animated morphing using CSS animation via SMIL fallback (JS will animate) -->
+          </svg>
+          <h2 style="color:#e6eef8;margin-top:8px">Halo! Saya Ahmad Alfin Hasan 👋</h2>
+          <p class="bio">Saya seorang pelajar dalam bidang Teknik Komputer dan Jaringan (TKJ).</p>
+
+          <div class="skills">
+            <div class="skill">Memiliki Jiwa Kepemimpinan</div>
+            <div class="skill">Bekerja Dalam Tim</div>
+            <div class="skill">Dapat Beradtasi Dengan Cepat</div>
+          </div>
+        </section>
+
+        <!-- Projects list -->
+        <section style="margin-top:14px">
+          <h3 style="color:#e6eef8;margin:0 0 8px 0">Proyek Yang Sudah Saya Kerjakan</h3>
+          <div class="projects">
+            <article class="project">
+              <div class="proj-thumb">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='480'><rect width='100%' height='100%' fill='%230b1220'/><circle cx='80' cy='60' r='45' fill='%237c3aed' opacity='0.9'/><text x='50%' y='70%' fill='white' font-size='28' text-anchor='middle'>Project A</text></svg>" alt="Project A" />
+              </div>
+              <div class="proj-info">
+                <h3>Project A</h3>
+                <p>Merakit Kabel Lan.</p>
+              </div>
+            </article>
+
+            <article class="project">
+              <div class="proj-thumb">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='480'><rect width='100%' height='100%' fill='%230b1220'/><rect x='20' y='20' width='120' height='80' rx='12' fill='%2306b6d4'/><text x='50%' y='70%' fill='white' font-size='26' text-anchor='middle'>Project B</text></svg>" alt="Project B" />
+              </div>
+              <div class="proj-info">
+                <h3>Project B</h3>
+                <p>Merakit Pc Bersama Tim.</p>
+              </div>
+            </article>
+
+            <article class="project">
+              <div class="proj-thumb">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='480'><rect width='100%' height='100%' fill='%230b1220'/><path d='M0 80 Q80 10 160 80 T320 80' stroke='%237c3aed' fill='none' stroke-width='5'/><text x='50%' y='70%' fill='white' font-size='24' text-anchor='middle'>Project C</text></svg>" alt="Project C" />
+              </div>
+              <div class="proj-info">
+                <h3>Project C</h3>
+                <p>Setting router bersama tim.</p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Right column: contact / social / small bio -->
+      <aside>
+        <div class="card">
+          <h4 style="margin:0;color:#e6eef8">Kontak</h4>
+          <p style="margin:8px 0 0 0;color:rgba(230,238,248,0.8)">Email: <strong>ahmadalfinhasan@gmail.com</strong></p>
+          <p style="margin:6px 0 0 0;color:rgba(230,238,248,0.8)">Lokasi: Legok, Indonesia</p>
+
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn" href="https://www.instagram.com/flralvnn?igsh=ZDVsemFwajhjZ21h">Instagram</a>
+            <a class="btn" href="">WhatsApp</a>
+          </div>
+
+          <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
+
+          <h4 style="margin:0;color:#e6eef8"></h4>
+          <p style="margin:8px 0 0 0;color:rgba(230,238,248,0.78);font-size:13px"></p>
+        </div>
+      </aside>
+
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> Ahmad Alfin Hasan</div>
+      <div>Built with ❤️ in VSCode</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle (very simple)
+    const themeBtn = document.getElementById('themeBtn');
+    let light = false;
+    themeBtn.addEventListener('click', ()=>{
+      light = !light;
+      if(light){
+        document.documentElement.style.setProperty('--bg1','linear-gradient(135deg,#e6eef8 0%, #dfeefc 60%, #eaf6ff 100%)');
+        document.documentElement.style.setProperty('color-scheme','light');
+        themeBtn.textContent = 'Dark';
+      } else {
+        document.documentElement.style.setProperty('--bg1','linear-gradient(135deg,#0f172a 0%, #0b1220 40%, #071029 100%)');
+        document.documentElement.style.setProperty('color-scheme','dark');
+        themeBtn.textContent = 'Light';
+      }
+    });
+
+    // Simple morphing of the hero SVG path for a smooth animated wave
+    (function animateWave(){
+      const path = document.getElementById('wave');
+      const frames = [
+        'M0 120 C 150 40 350 200 800 80 L800 200 L0 200 Z',
+        'M0 100 C 180 20 360 160 800 100 L800 200 L0 200 Z',
+        'M0 130 C 140 70 360 220 800 90 L800 200 L0 200 Z'
+      ];
+      let i=0;
+      setInterval(()=>{ i=(i+1)%frames.length; path.setAttribute('d', frames[i]); }, 1800);
+    })();
+
+    // Download CV: generate a basic text CV (you can replace this with a real PDF file)
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{
+      const cv = `ahmad alfin hasan\nWeb Developer\n\nKontak:\n- email: ahmadalfinhasan@gmail.com\n- lokasi: lehok, paradiso rivera\n\nDeskripsi:\nWeb developer berfokus pada UI/UX dan animasi.`;
+      const blob = new Blob([cv],{type:'text/plain'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'CV-NamaAnda.txt';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+  </script>
+</body>
+</html>
